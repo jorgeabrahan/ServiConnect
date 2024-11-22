@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './styles/global.css'
 
 export const metadata: Metadata = {
-  title: 'ServiConnect - Tu plataforma de servicios de confianza',
+  title: 'ServiConnect - Your trusted service platform',
   description:
     'Plataforma de conexión con proveedores de servicios locales confiables como electricistas, plomeros, jardineros, y más. Encuentra y solicita servicios fácilmente.'
 }
