@@ -1,10 +1,14 @@
 import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 import './styles/global.css'
+import { Header } from '@/components'
+
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'ServiConnect - Your trusted service platform',
   description:
-    'Plataforma de conexión con proveedores de servicios locales confiables como electricistas, plomeros, jardineros, y más. Encuentra y solicita servicios fácilmente.'
+    'Connecting platform with trusted local service providers like electricians, plumbers, gardeners, and more. Find and request services easily.'
 }
 
 export default function RootLayout({
@@ -14,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className='antialiased'>{children}</body>
+      <body className={`${inter.className} antialiased`}>
+        <Header />
+        {children}
+      </body>
     </html>
   )
 }
