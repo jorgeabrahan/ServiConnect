@@ -40,5 +40,5 @@ jobs:
         uses: denoland/deployctl@v1
         with:
           project: "serviconnect-backend"
-          entrypoint: "serviconnectbackend/src/main.ts"
+          entrypoint: "main.js"
           root: "serviconnectbackend/dist"
