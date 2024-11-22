@@ -23,15 +23,9 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon
+  ChevronDownIcon
 } from '@heroicons/react/20/solid'
 
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon }
-]
 const actions = [
   {
     id: 'categories',
