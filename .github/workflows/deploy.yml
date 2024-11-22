@@ -21,24 +21,16 @@ jobs:
       - name: Install Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: lts/*
-
-      - name: Install step
-        run: "npm install"
+          deno-version: v1.x
 
       - name: Build step
-        run: "npm run start"
+        run: "npm install"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "serviconnect-backend"
           entrypoint: "serviconnectbackend/src/main.ts"
-          root: "serviconnectbackend"
+          root: ""
           
-          exclude: **/*.test.ts
+          
