@@ -19,11 +19,12 @@ import {
   ChartPieIcon,
   CursorArrowRaysIcon,
   SquaresPlusIcon,
+  UserCircleIcon,
   WrenchScrewdriverIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
-import { storeModalAuth } from '@/logic/stores'
+import { storeAuth, storeModalAuth } from '@/logic/stores'
 import { CxButton } from '../Interactions'
 
 const actions = [
