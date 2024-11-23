@@ -23,6 +23,8 @@ import {
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { storeModalAuth } from '@/logic/stores'
+import { CxButton } from '../Interactions'
 
 const actions = [
   {
@@ -68,6 +70,7 @@ const actions = [
 ]
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const open = storeModalAuth((store) => store.open)
   return (
     <header className='bg-white'>
       <nav
@@ -151,12 +154,13 @@ export const Header = () => {
           })}
         </PopoverGroup>
         <div className='hidden lg:flex lg:items-center lg:gap-2 lg:flex-1 lg:justify-end'>
-          <Button className='py-1.5 px-3 text-sm/6 font-semibold'>
+          <Button
+            className='inline-flex items-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold'
+            onClick={() => open('login')}
+          >
             Log in
           </Button>
-          <Button className='inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[open]:bg-gray-700 data-[focus]:outline-1 data-[focus]:outline-white'>
-            Sign up
-          </Button>
+          <CxButton onClick={() => open('signup')}>Sign up</CxButton>
         </div>
       </nav>
       <Dialog
@@ -222,18 +226,18 @@ export const Header = () => {
                 })}
               </div>
               <div className='space-y-2 py-6'>
-                <a
-                  href='#'
+                <Button
                   className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
+                  onClick={() => open('login')}
                 >
                   Log in
-                </a>
-                <a
-                  href='#'
+                </Button>
+                <Button
                   className='-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50'
+                  onClick={() => open('login')}
                 >
                   Sign up
-                </a>
+                </Button>
               </div>
             </div>
           </div>
