@@ -70,6 +70,7 @@ const actions = [
 ]
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const isAuthenticated = storeAuth((store) => store.isAuthenticated)
   const open = storeModalAuth((store) => store.open)
   return (
     <header className='bg-white'>
@@ -154,6 +155,12 @@ export const Header = () => {
           })}
         </PopoverGroup>
         <div className='hidden lg:flex lg:items-center lg:gap-2 lg:flex-1 lg:justify-end'>
+          {isAuthenticated ? (
+            <Button>
+              <UserCircleIcon className='size-8' />
+            </Button>
+          ) : (
+            <>
           <Button
             className='inline-flex items-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold'
             onClick={() => open('login')}
@@ -161,6 +168,8 @@ export const Header = () => {
             Log in
           </Button>
           <CxButton onClick={() => open('signup')}>Sign up</CxButton>
+            </>
+          )}
         </div>
       </nav>
       <Dialog
