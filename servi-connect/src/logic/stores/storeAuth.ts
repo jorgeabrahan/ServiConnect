@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { User } from '../entities'
 
-interface AuthState {
+interface StoreAuth {
   user: User | null
   jwt: string | null
   isAuthenticated: boolean
@@ -9,7 +9,7 @@ interface AuthState {
   logout: () => void
 }
 
-export const storeAuth = create<AuthState>((set) => ({
+export const storeAuth = create<StoreAuth>((set) => ({
   user: null,
   jwt: null,
   isAuthenticated: false,
