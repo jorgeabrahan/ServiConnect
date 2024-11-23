@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:frontend": "cd serviconnect && npm install",
+    "install:frontend": "cd servi-connect && npm install",
     "install:backend": "cd serviconnectbackend && npm install",
     "install:all": "run-p install:frontend install:backend",
-    "start:frontend": "cd serviconnect && npm run dev",
+    "start:frontend": "cd servi-connect && npm run dev",
     "start:backend": "cd serviconnectbackend && npm run start:dev",
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\""
   },
