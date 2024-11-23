@@ -22,9 +22,7 @@ import {
   WrenchScrewdriverIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
-import {
-  ChevronDownIcon
-} from '@heroicons/react/20/solid'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 const actions = [
   {
@@ -70,7 +68,6 @@ const actions = [
 ]
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
   return (
     <header className='bg-white'>
       <nav
@@ -188,7 +185,6 @@ export const Header = () => {
               <div className='space-y-2 py-6'>
                 {actions.map((action) => {
                   const actionItemsAmount = action.items?.length ?? 0
-                  console.log(actionItemsAmount, action)
                   if (actionItemsAmount === 0) {
                     return (
                       <a

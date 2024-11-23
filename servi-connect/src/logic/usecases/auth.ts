@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { User } from '@/core/domain/entities'
+import { User } from '@/logic/entities'
 import { storeAuth } from '../stores'
 import { API_URL } from 'config'
 import { toast } from 'sonner'
