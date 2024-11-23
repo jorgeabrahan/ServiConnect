@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { User } from '@/logic/entities'
-import { storeAuth } from '../stores'
 import { API_URL } from 'config'
 import { toast } from 'sonner'
 import { StandardApiResponse } from '../types'
+import { storeAuth } from '../stores'
 
 interface LoginData {
   email: string
@@ -37,7 +37,8 @@ export const login = async (data: LoginData) => {
     if (!isSuccess || !responseData) return toast.error(error)
     const { user, access_token } = responseData
     storeAuth.getState().login(user, access_token)
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     toast.error('Failed to login')
   }
 }
@@ -53,7 +54,8 @@ export const signup = async (data: SignupData) => {
     if (!isSuccess || !responseData) return toast.error(error)
     const { user, access_token } = responseData
     storeAuth.getState().login(user, access_token)
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     toast.error('Failed to sign up')
   }
 }

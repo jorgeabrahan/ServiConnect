@@ -7,7 +7,8 @@ export const imagekitAuthenticator = async () => {
       return { signature: null, expire: null, token: null }
     }
     return await response.json()
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
     return { signature: null, expire: null, token: null }
   }
 }
