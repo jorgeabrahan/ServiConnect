@@ -77,7 +77,7 @@ export const Header = () => {
   useEffect(() => {
     const a = async () => {
       const res = await getCategories()
-      console.log(res.data)
+      console.log(res)
     }
     a()
   }, [])
