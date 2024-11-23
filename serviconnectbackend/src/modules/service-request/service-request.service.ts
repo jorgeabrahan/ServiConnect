@@ -183,7 +183,6 @@ export class ServiceRequestService {
         .toLowerCase();
 
       const userCity = serviceRequest.user.address.countryDepartmentCity;
-      console.log(userCity);
 
       const availableUsers = await this.professionalUserRepository
         .createQueryBuilder('professionalUser')
