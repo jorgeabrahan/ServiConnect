@@ -34,12 +34,22 @@ export const login = async (data: LoginData) => {
     )
     const { isSuccess, data: responseData, error } = response.data
 
-    if (!isSuccess || !responseData) return toast.error(error)
+    if (!isSuccess || !responseData) {
+      toast.error(error)
+      return response.data
+    }
     const { user, access_token } = responseData
     storeAuth.getState().login(user, access_token)
+    return response.data
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_) {
-    toast.error('Failed to login')
+    const fallbackError = 'Failed to login'
+    toast.error(fallbackError)
+    return {
+      isSuccess: false,
+      data: null,
+      error: fallbackError
+    }
   }
 }
 
@@ -51,11 +61,21 @@ export const signup = async (data: SignupData) => {
     )
     const { isSuccess, data: responseData, error } = response.data
 
-    if (!isSuccess || !responseData) return toast.error(error)
+    if (!isSuccess || !responseData) {
+      toast.error(error)
+      return response.data
+    }
     const { user, access_token } = responseData
     storeAuth.getState().login(user, access_token)
+    return response.data
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (_) {
-    toast.error('Failed to sign up')
+    const fallbackError = 'Failed to sign up'
+    toast.error(fallbackError)
+    return {
+      isSuccess: false,
+      data: null,
+      error: fallbackError
+    }
   }
 }
