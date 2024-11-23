@@ -1,4 +1,4 @@
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 interface HeaderModalProps {
   onClose?: () => void
@@ -20,7 +20,7 @@ export const HeaderModal: React.FC<HeaderModalProps> = ({
         type='button'
         className={`hover:scale-110 transition-transform ${className}`}
       >
-        <XMarkIcon />
+        <XCircleIcon className='size-6 pointer-events-none' />
         <span className='sr-only'>Close modal</span>
       </button>
     </header>
