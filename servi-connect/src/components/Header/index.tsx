@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   Dialog,
@@ -26,6 +26,7 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { storeAuth, storeModalAuth } from '@/logic/stores'
 import { CxButton } from '../Interactions'
+import { getCategories } from '@/logic/usecases'
 
 const actions = [
   {
@@ -73,6 +74,13 @@ export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const isAuthenticated = storeAuth((store) => store.isAuthenticated)
   const open = storeModalAuth((store) => store.open)
+  useEffect(() => {
+    const a = async () => {
+      const res = await getCategories()
+      console.log(res.data)
+    }
+    a()
+  }, [])
   return (
     <header className='bg-white'>
       <nav
@@ -162,13 +170,13 @@ export const Header = () => {
             </Button>
           ) : (
             <>
-          <Button
-            className='inline-flex items-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold'
-            onClick={() => open('login')}
-          >
-            Log in
-          </Button>
-          <CxButton onClick={() => open('signup')}>Sign up</CxButton>
+              <Button
+                className='inline-flex items-center gap-2 rounded-md py-1.5 px-3 text-sm/6 font-semibold'
+                onClick={() => open('login')}
+              >
+                Log in
+              </Button>
+              <CxButton onClick={() => open('signup')}>Sign up</CxButton>
             </>
           )}
         </div>
