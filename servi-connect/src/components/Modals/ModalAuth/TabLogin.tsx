@@ -1,17 +1,25 @@
 'use client'
 import { CxButton, CxInput } from '@/components/Interactions'
 import { useControlledForm } from '@/logic/hooks'
+import { storeModalAuth } from '@/logic/stores'
+import { login } from '@/logic/usecases'
 
-import { FormEvent } from 'react'
+import { FormEvent, useState } from 'react'
 
 export const TabLogin = () => {
-  const { form, onInputChange } = useControlledForm({
+  const close = storeModalAuth((store) => store.close)
+  const { form, email, password, onInputChange } = useControlledForm({
     email: '',
     password: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true)
+    const { isSuccess } = await login({ email, password })
+    setIsLoading(false)
+    if (isSuccess) close()
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -21,16 +29,24 @@ export const TabLogin = () => {
           id={form.email.id}
           value={form.email.value}
           onChange={onInputChange}
+          disabled={isLoading}
+          required
         />
         <CxInput
           label='Password'
           id={form.password.id}
           value={form.password.value}
           onChange={onInputChange}
+          disabled={isLoading}
           type='password'
+          required
         />
       </div>
-      <CxButton className='justify-center w-full' type='submit'>
+      <CxButton
+        className='justify-center w-full'
+        type='submit'
+        disabled={isLoading}
+      >
         Log in
       </CxButton>
     </form>
