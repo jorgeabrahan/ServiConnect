@@ -7,12 +7,16 @@ export const CxTextarea = ({
   id,
   placeholder,
   value,
+  required = false,
+  disabled = false,
   onChange
 }: {
   label: string
   id: string
   placeholder?: string
   value?: string
+  required?: boolean
+  disabled?: boolean
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }) => {
   return (
@@ -24,7 +28,11 @@ export const CxTextarea = ({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
-        className='mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm resize-none'
+        required={required}
+        disabled={disabled}
+        className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm resize-none ${
+          disabled && 'opacity-50'
+        }`}
       ></Textarea>
     </WrapperInput>
   )
