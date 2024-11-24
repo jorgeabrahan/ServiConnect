@@ -40,7 +40,7 @@ import {
     CategoryModule,
     ServiceModule,
     ProfessionalUserModule,
-    ServiceRequestModule
+    ServiceRequestModule,
   ],
 })
 export class AppModule {}
