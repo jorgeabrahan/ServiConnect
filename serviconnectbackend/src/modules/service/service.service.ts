@@ -33,7 +33,7 @@ export class ServiceService {
     @InjectRepository(ServiceFAQ)
     private readonly serviceFAQRepository: Repository<ServiceFAQ>,
     @InjectRepository(ServiceTraitBulletPoint)
-    private readonly serviceTraitBulletPointRepository: Repository<ServiceTraitBulletPoint>
+    private readonly serviceTraitBulletPointRepository: Repository<ServiceTraitBulletPoint>,
   ) {}
 
   async create(
@@ -185,29 +185,38 @@ export class ServiceService {
   ): Promise<StandardApiResponse<ServiceTrait>> {
     try {
       const service = await this.serviceRepository.findOneBy({ id: serviceId });
-      if (!service)
+      if (!service) {
         throw new NotFoundException(`Service with ID ${serviceId} not found`);
+      }
+
       const { bulletPoints, ...restServiceTraitDto } = serviceTraitDto;
       const trait = this.serviceTraitRepository.create({
         ...restServiceTraitDto,
         service,
       });
       const savedTrait = await this.serviceTraitRepository.save(trait);
-      const bulletPointsEntities = await Promise.all(
-        bulletPoints.map((point) =>
-          this.serviceTraitBulletPointRepository.create({
-            title: point,
-            serviceTrait: savedTrait.id,
-          }),
-        ),
-      );
-      savedTrait.bulletPoints =
-        await this.serviceTraitBulletPointRepository.save(bulletPointsEntities);
+
+      if (bulletPoints) {
+        const bulletPointsEntities = await Promise.all(
+          bulletPoints.map((point) =>
+            this.serviceTraitBulletPointRepository.create({
+              title: point,
+              serviceTrait: savedTrait.id,
+            }),
+          ),
+        );
+        savedTrait.bulletPoints =
+          await this.serviceTraitBulletPointRepository.save(
+            bulletPointsEntities,
+          );
+      }
+
       return { isSuccess: true, data: savedTrait, error: null };
     } catch (error) {
       return { isSuccess: false, data: null, error: error.message };
     }
   }
+
   async updateTrait(
     serviceId: string,
     id: string,
@@ -218,14 +227,16 @@ export class ServiceService {
         where: { id },
         relations: ['bulletPoints', 'service'],
       });
-      if (trait.service.id !== serviceId) {
-        throw new NotFoundException(
-          `Trait with ID ${id} does not belong to service ${serviceId}`,
-        );
-      }
+
       if (!trait) {
         throw new NotFoundException(
           `Trait with ID ${id} belonging to service ${serviceId} not found`,
+        );
+      }
+
+      if (trait.service.id !== serviceId) {
+        throw new NotFoundException(
+          `Trait with ID ${id} does not belong to service ${serviceId}`,
         );
       }
 
@@ -256,6 +267,7 @@ export class ServiceService {
       return { isSuccess: false, data: null, error: error.message };
     }
   }
+
   async removeTrait(
     serviceId: string,
     id: string,
