@@ -91,7 +91,6 @@ export class CategoryService {
     try {
       const categories = await this.categoryRepository.find({
         relations: ['services'],
-        select: { services: { id: true, title: true, description: true } },
       });
       return {
         isSuccess: true,
@@ -113,13 +112,6 @@ export class CategoryService {
       const category = await this.categoryRepository.findOne({
         where: { id },
         relations: ['services'],
-        select: {
-          services: {
-            id: true,
-            title: true,
-            description: true,
-          },
-        },
       });
       if (!category) {
         throw new NotFoundException(`Category with ID ${id} not found`);
