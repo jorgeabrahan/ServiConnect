@@ -14,6 +14,7 @@ import { useCategories } from '@/logic/hooks'
 import { HeaderActionPopover } from './HeaderActionPopover'
 import { HeaderActionDisclosure } from './HeaderActionDisclosure'
 import Link from 'next/link'
+import { WrapperContentDelimiter } from '../Wrappers'
 
 const actions = [
   {
@@ -34,9 +35,10 @@ export const Header = () => {
   const { categories } = useCategories()
   return (
     <header className='bg-white'>
-      <nav
-        aria-label='Global'
-        className='mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8'
+      <WrapperContentDelimiter
+        as='nav'
+        className='flex items-center justify-between'
+        matchBlockPadding
       >
         <div className='flex lg:flex-1'>
           <Link href='/' className='-m-1.5 p-1.5'>
@@ -95,13 +97,12 @@ export const Header = () => {
             </>
           )}
         </div>
-      </nav>
+      </WrapperContentDelimiter>
       <Dialog
         open={mobileMenuOpen}
         onClose={setMobileMenuOpen}
         className='lg:hidden'
       >
-        <div className='fixed inset-0 z-10' />
         <DialogPanel className='fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10'>
           <div className='flex items-center justify-between'>
             <Link href='/' className='-m-1.5 p-1.5'>
