@@ -47,7 +47,10 @@ export class CountryDepartmentController {
     @Param('id') id: string,
     @Body() department: CreateCountryDepartmentDto,
   ): Promise<StandardApiResponse<CountryDepartment>> {
-    return this.departmentService.update(id, department as CreateCountryDepartmentDto);
+    return this.departmentService.update(
+      id,
+      department as CreateCountryDepartmentDto,
+    );
   }
 
   @Delete(':id')

@@ -82,7 +82,10 @@ export class UserService {
 
   async findByEmail(email: string): Promise<User | undefined> {
     try {
-      return await this.userRepository.findOne({ where: { email }, relations: ['professionalUser'] });
+      return await this.userRepository.findOne({
+        where: { email },
+        relations: ['professionalUser'],
+      });
     } catch (error) {
       throw new Error(error?.message ?? 'Failed to find user by email');
     }
@@ -90,7 +93,10 @@ export class UserService {
 
   async findById(id: string): Promise<User | undefined> {
     try {
-      return await this.userRepository.findOne({ where: { id }, relations: ['professionalUser'] });
+      return await this.userRepository.findOne({
+        where: { id },
+        relations: ['professionalUser'],
+      });
     } catch (error) {
       throw new Error(error?.message ?? 'Failed to find user by id');
     }
@@ -113,6 +119,7 @@ export class UserService {
         };
       }
       return { isSuccess: true, data: userAddress, error: null };
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       const fallbackErrorMessage = 'Failed to get user address';
       return { isSuccess: false, data: null, error: fallbackErrorMessage };

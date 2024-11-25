@@ -1,7 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { StandardApiResponse } from 'src/common/interfaces';
 import {
@@ -23,8 +20,9 @@ export class CountryDepartmentService {
     department: CountryDepartment,
   ): Promise<StandardApiResponse<CountryDepartment>> {
     try {
-      const createdDepartment =
-        await this.departmentRepository.save(department);
+      const createdDepartment = await this.departmentRepository.save(
+        department,
+      );
       return {
         isSuccess: true,
         data: createdDepartment,
