@@ -22,6 +22,7 @@ export const ModalAddress = () => {
     postalCode: ''
   })
   const updateUserAddress = storeUser((store) => store.updateUserAddress)
+  const [isLoading, setIsLoading] = useState(false)
   const [departmentId, setDepartmentId] = useState('')
   const [cityId, setCityId] = useState('')
   const [departmentCities, setDepartmentCities] = useState<
@@ -74,6 +75,7 @@ export const ModalAddress = () => {
       countryDepartmentCity: cityId
     }
     let res
+    setIsLoading(true)
     if (isEditing) {
       if (!editingAddress) return toast.error('Address not found')
       res = await updateAddress(user?.id, editingAddress?.id, newAddress, jwt)
@@ -89,6 +91,7 @@ export const ModalAddress = () => {
       })
       close()
     }
+    setIsLoading(false)
   }
   return (
     <WrapperModal open={isOpen} onClose={close}>
@@ -103,6 +106,7 @@ export const ModalAddress = () => {
             id={form.street.id}
             value={form.street.value}
             onChange={onInputChange}
+            disabled={isLoading}
             required
           />
           <CxInput
@@ -110,6 +114,7 @@ export const ModalAddress = () => {
             id={form.neighborhood.id}
             value={form.neighborhood.value}
             onChange={onInputChange}
+            disabled={isLoading}
             required
           />
           <CxInput
@@ -117,6 +122,7 @@ export const ModalAddress = () => {
             id={form.postalCode.id}
             value={form.postalCode.value}
             onChange={onInputChange}
+            disabled={isLoading}
             required
           />
           <CxSelect
@@ -131,6 +137,7 @@ export const ModalAddress = () => {
                 label: cd.title
               }))
             ]}
+            disabled={isLoading}
             required
           />
           <CxSelect
@@ -142,10 +149,15 @@ export const ModalAddress = () => {
               { id: 'none', label: '[select city]' },
               ...departmentCities
             ]}
+            disabled={isLoading}
             required
           />
         </div>
-        <CxButton className='justify-center w-full' type='submit'>
+        <CxButton
+          className='justify-center w-full'
+          type='submit'
+          disabled={isLoading}
+        >
           {isEditing ? 'Actualizar' : 'Crear'} dirección
         </CxButton>
       </form>
