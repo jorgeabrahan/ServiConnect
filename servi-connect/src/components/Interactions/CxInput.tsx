@@ -1,8 +1,17 @@
 'use client'
 import { WrapperInput } from '@/components/Wrappers'
-import { Input } from '@headlessui/react'
 
-export const CxInput = ({
+interface CxInputProps extends React.ComponentProps<'input'> {
+  label: string
+  id: string
+  placeholder?: string
+  value?: string
+  type?: string
+  required?: boolean
+  disabled?: boolean
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+export const CxInput: React.FC<CxInputProps> = ({
   label,
   id,
   placeholder,
@@ -12,20 +21,10 @@ export const CxInput = ({
   disabled = false,
   onChange,
   ...props
-}: {
-  label: string
-  id: string
-  placeholder?: string
-  value?: string
-  type?: string
-  required?: boolean
-  disabled?: boolean
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  [key: string]: any
 }) => {
   return (
     <WrapperInput label={label} id={id}>
-      <Input
+      <input
         type={type}
         name={id}
         id={id}
