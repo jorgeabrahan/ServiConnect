@@ -17,8 +17,8 @@ export const WrapperContentDelimiter: React.FC<
 }) => {
   return (
     <Tag
-      className={`px-2 sm:px-4 lg:px-6 xl:px-8 -md:max-h-[500px] -md:overflow-y-scroll scrollbar-hide ${
-        matchBlockPadding && 'py-2 sm:py-4 lg:py-6 xl:py-8'
+      className={`px-2 sm:px-4 lg:px-6 xl:px-8 ${
+        matchBlockPadding && 'py-4 sm:py-6 lg:py-8 xl:py-10'
       } ${!hasCustomWidth && 'w-full mx-auto max-w-[1550px]'} ${className}`}
       {...props}
     >
