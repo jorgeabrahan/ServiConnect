@@ -9,3 +9,10 @@ export interface UserAddress {
   postalCode: string
   countryDepartmentCity: CountryDepartmentCity
 }
+
+export interface UserAddressDto {
+  street: string
+  neighborhood: string
+  postalCode: string
+  countryDepartmentCity: string
+}
