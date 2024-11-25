@@ -5,10 +5,6 @@ import { useCategories } from '@/logic/hooks'
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 
-// import { imagekitAuthenticator } from '@/logic/usecases'
-// import { IMAGEKIT_PUBLIC_KEY, IMAGEKIT_URL } from 'config'
-// import { IKUpload, ImageKitProvider } from 'imagekitio-next'
-
 const steps = [
   {
     title: 'Create account',
@@ -26,34 +22,14 @@ const steps = [
 ]
 export default function Home() {
   const { categories } = useCategories()
-  // const onError = (err: any) => {
-  //   console.log(err)
-  // }
-  // const onSuccess = (res: any) => {
-  //   console.log(res)
-  // }
   return (
     <WrapperContentDelimiter>
-      {/* <ImageKitProvider
-        publicKey={IMAGEKIT_PUBLIC_KEY}
-        urlEndpoint={IMAGEKIT_URL}
-        authenticator={imagekitAuthenticator}
-      >
-        <div>
-          <h2>File upload</h2>
-          <IKUpload
-            fileName='test-upload.png'
-            onError={onError}
-            onSuccess={onSuccess}
-          />
-        </div>
-      </ImageKitProvider> */}
       <article className='py-16 text-center'>
         <h1 className='text-3xl md:text-4xl font-bold mb-3'>
-          We'll take care of your home
+          We&apos;ll take care of your home
         </h1>
         <p className='text-black/60 max-w-[700px] mx-auto mb-14'>
-          Here's how simple ServiConnect allows you to find the perfect
+          Here&apos;s how simple ServiConnect allows you to find the perfect
           professional for the service you need.
         </p>
         <section className='grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] max-w-[1000px] mx-auto gap-4'>
