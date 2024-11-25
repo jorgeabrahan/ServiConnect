@@ -116,7 +116,7 @@ Now you should be able to access the frontend at
 ### Deployment
 
 - Backend (Vercel)
-  ([https://serviconnectbackend-gt0zxcadk-jorge-abrahans-projects.vercel.app/api](https://serviconnectbackend-gt0zxcadk-jorge-abrahans-projects.vercel.app/api))
+  ([https://serviconnect-production.up.railway.app/api](https://serviconnect-production.up.railway.app/api))
 - Frontend (Vercel)
   ([https://servi-connect.vercel.app/](https://servi-connect.vercel.app/))
 
