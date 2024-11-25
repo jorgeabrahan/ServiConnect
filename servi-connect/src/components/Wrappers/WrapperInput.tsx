@@ -9,7 +9,10 @@ export const WrapperInput = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className='block text-sm font-medium text-gray-700'>
+      <label
+        htmlFor={id}
+        className='block text-sm font-medium text-gray-700 capitalize'
+      >
         {label}
       </label>
       {children}
