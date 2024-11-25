@@ -10,7 +10,8 @@ export const CxInput = ({
   type = 'text',
   required = false,
   disabled = false,
-  onChange
+  onChange,
+  ...props
 }: {
   label: string
   id: string
@@ -20,6 +21,7 @@ export const CxInput = ({
   required?: boolean
   disabled?: boolean
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  [key: string]: any
 }) => {
   return (
     <WrapperInput label={label} id={id}>
@@ -37,6 +39,7 @@ export const CxInput = ({
         className={`mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm ${
           disabled && 'opacity-50'
         }`}
+        {...props}
       />
     </WrapperInput>
   )
