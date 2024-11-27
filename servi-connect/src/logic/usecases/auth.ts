@@ -5,12 +5,12 @@ import { toast } from 'sonner'
 import { StandardApiResponse } from '../types'
 import { storeAuth } from '../stores'
 
-interface LoginData {
+interface LoginDto {
   email: string
   password: string
 }
 
-interface SignupData {
+interface SignupDto {
   firstName: string
   lastName: string
   phoneNumber: string
@@ -26,7 +26,7 @@ interface AuthResponse {
   access_token: string
 }
 
-export const login = async (data: LoginData) => {
+export const login = async (data: LoginDto) => {
   try {
     const response = await axios.post<StandardApiResponse<AuthResponse>>(
       `${API_URL}/auth/login`,
@@ -53,7 +53,7 @@ export const login = async (data: LoginData) => {
   }
 }
 
-export const signup = async (data: SignupData) => {
+export const signup = async (data: SignupDto) => {
   try {
     const response = await axios.post<StandardApiResponse<AuthResponse>>(
       `${API_URL}/auth/signup`,
