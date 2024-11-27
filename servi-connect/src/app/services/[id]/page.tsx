@@ -79,7 +79,6 @@ export default function ServiceDetails() {
       )
     }
     const selectedDate = new Date(`${date}T${time}:00`)
-    console.log(selectedDate, minBookingDate)
     if (selectedDate < minBookingDate) {
       return toast.error(
         'The service request date must be at least 2 hours in the future.'
