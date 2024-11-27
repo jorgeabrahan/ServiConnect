@@ -20,10 +20,9 @@ const formatDateForInput = (date: Date) => {
   const day = date.getDate().toString().padStart(2, '0')
   return `${year}-${month}-${day}`
 }
-const formatTimeForInput = (date: Date) => {
-  const hours = date.getHours().toString().padStart(2, '0')
-  const minutes = date.getMinutes().toString().padStart(2, '0')
-  return `${hours}:${minutes}`
+const formatRoundTimeForInput = (date: Date) => {
+  const hours = (date.getHours() + 1).toString().padStart(2, '0')
+  return `${hours}:00`
 }
 
 const today = new Date()
@@ -43,7 +42,7 @@ export default function ServiceDetails() {
     useControlledForm({
       hoursBooked: '',
       date: formatDateForInput(today),
-      time: formatTimeForInput(minBookingDate),
+      time: formatRoundTimeForInput(minBookingDate),
       description: ''
     })
   const [serviceSpecificationAmounts, setServiceSpecificationAmounts] =
@@ -80,8 +79,11 @@ export default function ServiceDetails() {
       )
     }
     const selectedDate = new Date(`${date}T${time}:00`)
+    console.log(selectedDate, minBookingDate)
     if (selectedDate < minBookingDate) {
-      return toast.error('The service request date must be in the future.')
+      return toast.error(
+        'The service request date must be at least 2 hours in the future.'
+      )
     }
     if (
       hoursBooked === 'none' ||
