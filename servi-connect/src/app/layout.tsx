@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './styles/global.css'
-import { Header, ModalAuth } from '@/components'
+import { Footer, Header, ModalAuth } from '@/components'
 import { Toaster } from 'sonner'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -22,6 +22,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <Header />
         {children}
+        <Footer />
         <Toaster richColors />
         <ModalAuth />
       </body>
