@@ -59,7 +59,7 @@ export class ServiceRequestService {
 
       const today = new Date();
       const minBookingDate = new Date(today.getTime() + 2 * 60 * 60 * 1000);
-      const requestedTime = new Date(`${dto.date}T${dto.time}`);
+      const requestedTime = new Date(`${dto.date}T${dto.time}:00`);
       if (requestedTime < minBookingDate) {
         throw new BadRequestException(
           'The requested service time must be at least 2 hours in the future.',
