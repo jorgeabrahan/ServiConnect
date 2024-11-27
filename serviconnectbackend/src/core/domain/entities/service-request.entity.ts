@@ -6,6 +6,7 @@ import {
   OneToMany,
   JoinColumn,
   OneToOne,
+  CreateDateColumn,
 } from 'typeorm';
 import { Service } from './service.entity';
 import { User } from './user.entity';
@@ -56,4 +57,7 @@ export class ServiceRequest {
   })
   @JoinColumn()
   userReview: UserReview;
+
+  @CreateDateColumn({ type: 'timestamp' })
+  createdAt: Date;
 }
