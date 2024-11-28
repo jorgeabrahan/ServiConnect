@@ -108,8 +108,8 @@ export default function ServiceDetails() {
     }
     setIsLoading(true)
     const { isSuccess } = await createServiceRequest(
-      newServiceRequest,
       user.id,
+      newServiceRequest,
       jwt
     )
     if (isSuccess) redirect(`/dashboard`)
