@@ -85,3 +85,34 @@ export const createProfessionalUserServiceArea = async (
     return { isSuccess: false, data: null, error: fallbackError }
   }
 }
+
+export const deleteProfessionalUserServiceArea = async (
+  userId: string,
+  serviceAreaId: string,
+  token: string
+) => {
+  try {
+    const response = await axios.delete<
+      StandardApiResponse<ProfessionalUserServiceArea>
+    >(
+      `${API_URL}/professional-users/${userId}/service-areas/${serviceAreaId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    const { isSuccess, error } = response.data
+    if (!isSuccess) {
+      toast.error(error)
+      return response.data
+    }
+    toast.success('Service area removed successfully')
+    return response.data
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_) {
+    const fallbackError = 'Failed to remove service area from professional user'
+    toast.error(fallbackError)
+    return { isSuccess: false, data: null, error: fallbackError }
+  }
+}
