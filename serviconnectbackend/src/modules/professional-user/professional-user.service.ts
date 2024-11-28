@@ -337,6 +337,7 @@ export class ProfessionalService {
       const countryDepartmentCity =
         await this.countryDepartmentCityRepository.findOne({
           where: { id: dto.countryDepartmentCityId },
+          relations: ['countryDepartment'],
         });
       if (!countryDepartmentCity) {
         throw new NotFoundException(
@@ -348,11 +349,23 @@ export class ProfessionalService {
           professionalUser: user.professionalUser,
           countryDepartmentCity: countryDepartmentCity,
         });
+      const savedProfessionalUserServiceArea =
+        await this.professionalUserServiceAreaRepository.save(
+          professionalUserServiceArea,
+        );
+
+      const serviceAreaWithRelations =
+        await this.professionalUserServiceAreaRepository.findOne({
+          where: { id: savedProfessionalUserServiceArea.id },
+          relations: [
+            'countryDepartmentCity',
+            'countryDepartmentCity.countryDepartment',
+          ],
+        });
+
       return {
         isSuccess: true,
-        data: await this.professionalUserServiceAreaRepository.save(
-          professionalUserServiceArea,
-        ),
+        data: serviceAreaWithRelations,
         error: null,
       };
     } catch (error) {
