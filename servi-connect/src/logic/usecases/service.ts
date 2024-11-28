@@ -36,17 +36,17 @@ export const getServiceById = async (id: string) => {
 }
 
 export const createServiceRequest = async (
-  serviceRequest: ServiceRequestDto,
   userId: string,
-  jwt: string
+  body: ServiceRequestDto,
+  token: string
 ) => {
   try {
     const response = await axios.post<StandardApiResponse<Service>>(
       `${API_URL}/service-requests/user/${userId}`,
-      serviceRequest,
+      body,
       {
         headers: {
-          Authorization: `Bearer ${jwt}`
+          Authorization: `Bearer ${token}`
         }
       }
     )
