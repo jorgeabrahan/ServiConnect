@@ -3,6 +3,14 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
   }
+}
+
+.no-marker {
+  list-style: none; /* Eliminar marcador predeterminado */
+}
+
+.no-marker::-webkit-details-marker {
+  display: none; /* Ocultar marcador predeterminado en navegadores basados en WebKit */
 }
