@@ -29,6 +29,7 @@ export const ModalAddress = () => {
     { id: string; label: string }[]
   >([])
   useEffect(() => {
+    if (!isEditing || !editingAddress) return
     setDepartmentCities(
       countryDepartments
         .find(
@@ -38,8 +39,6 @@ export const ModalAddress = () => {
         ?.cities?.map((city) => ({ id: city.id, label: city.title })) ?? []
     )
     if (
-      isEditing &&
-      editingAddress &&
       departmentId ===
         editingAddress.countryDepartmentCity.countryDepartment.id &&
       cityId === ''
@@ -47,7 +46,7 @@ export const ModalAddress = () => {
       setCityId(editingAddress.countryDepartmentCity.id)
       return
     }
-  }, [departmentId])
+  }, [])
   useEffect(() => {
     if (!isEditing || !editingAddress) return
     setFormState({
@@ -96,8 +95,9 @@ export const ModalAddress = () => {
   return (
     <WrapperModal open={isOpen} onClose={close}>
       <HeaderModal
-        title={`${isEditing ? 'Actualizar' : 'Crear'} dirección`}
+        title={`${isEditing ? 'Update' : 'Create'} address`}
         onClose={close}
+        className='mb-4'
       />
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col gap-4 mb-4 max-h-[400px] overflow-y-auto'>
@@ -129,7 +129,17 @@ export const ModalAddress = () => {
             label='Department'
             id={'departmentId'}
             value={departmentId}
-            onChange={(e) => setDepartmentId(e.target.value)}
+            onChange={(e) => {
+              setDepartmentId(e.target.value)
+              setDepartmentCities(
+                countryDepartments
+                  .find((cd) => cd.id === e.target.value)
+                  ?.cities?.map((city) => ({
+                    id: city.id,
+                    label: city.title
+                  })) ?? []
+              )
+            }}
             options={[
               { id: 'none', label: '[select department]' },
               ...countryDepartments.map((cd) => ({
@@ -158,7 +168,7 @@ export const ModalAddress = () => {
           type='submit'
           disabled={isLoading}
         >
-          {isEditing ? 'Actualizar' : 'Crear'} dirección
+          {isEditing ? 'Update' : 'Create'} address
         </CxButton>
       </form>
     </WrapperModal>
