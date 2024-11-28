@@ -1,17 +1,19 @@
 'use client'
 import {
   ModalAddress,
+  ModalAddServiceArea,
   WrapperContentDelimiter,
   WrapperProtectedRoute
 } from '@/components'
 import { CxButton } from '@/components/Interactions'
 import { useUser } from '@/logic/hooks'
 import { storeAuth, storeModalAddress } from '@/logic/stores'
+import { ProfessionalUser } from './ProfessionalUser'
 
 export default function Dashboard() {
-  const open = storeModalAddress((store) => store.open)
+  const openModalAddress = storeModalAddress((store) => store.open)
   const user = storeAuth((store) => store.user)
-  const { userAddress } = useUser()
+  const { userAddress, userProfessionalProfile } = useUser()
   return (
     <WrapperProtectedRoute>
       <WrapperContentDelimiter>
@@ -59,13 +61,18 @@ export default function Dashboard() {
         )}
         <CxButton
           onClick={() => {
-            if (userAddress) return open(userAddress)
-            open()
+            if (userAddress) return openModalAddress(userAddress)
+            openModalAddress()
           }}
         >
-          {userAddress ? 'Actualizar' : 'Crear'} dirección
+          {userAddress ? 'Update' : 'Create'} address
         </CxButton>
+        {!userProfessionalProfile?.id && (
+          <CxButton>Become a professional</CxButton>
+        )}
+        {userProfessionalProfile?.id && <ProfessionalUser />}
       </WrapperContentDelimiter>
+      <ModalAddServiceArea />
       <ModalAddress />
     </WrapperProtectedRoute>
   )
