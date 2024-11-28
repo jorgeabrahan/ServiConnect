@@ -30,13 +30,13 @@ export const getUserAddress = async (userId: string, token: string) => {
 
 export const createAddress = async (
   userId: string,
-  address: UserAddressDto,
+  body: UserAddressDto,
   token: string
 ) => {
   try {
     const response = await axios.post<StandardApiResponse<UserAddress>>(
       `${API_URL}/users/${userId}/address`,
-      address,
+      body,
       {
         headers: {
           Authorization: `Bearer ${token}`
@@ -61,13 +61,13 @@ export const createAddress = async (
 export const updateAddress = async (
   userId: string,
   addressId: string,
-  address: UserAddressDto,
+  body: UserAddressDto,
   token: string
 ) => {
   try {
     const response = await axios.patch<StandardApiResponse<UserAddress>>(
       `${API_URL}/users/${userId}/address/${addressId}`,
-      address,
+      body,
       {
         headers: {
           Authorization: `Bearer ${token}`
